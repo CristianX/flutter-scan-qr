@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:lectorqr/src/pages/mapas_page.dart';
 import 'package:lectorqr/src/pages/direcciones_page.dart';
 
+// Barcode Scanner
+import 'package:barcode_scan/barcode_scan.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -32,7 +35,7 @@ class _HomePageState extends State<HomePage> {
       // Creación de floatingActionButton
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
-        onPressed: (){},
+        onPressed: _scanQR,
         // Color de tema global para el floatingActionButton
         backgroundColor: Theme.of( context ).primaryColor,
       ),
@@ -73,5 +76,27 @@ class _HomePageState extends State<HomePage> {
       default:
       return MapasPage();
     }
+  }
+
+  // Escaneando QR
+  _scanQR() async {
+
+    // cristianx.github.io
+    // geo:40.662799870614315,-74.26137342890628
+
+    dynamic futureString = '';
+
+    try {
+      futureString = await BarcodeScanner.scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
+
+    print('Future String: ${futureString.rawContent}');
+
+    if( futureString != null ) {
+      print('Tenemos Información');
+    }
+
   }
 }

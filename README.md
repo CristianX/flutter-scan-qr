@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+# Dependencias
+- Barcode Scan `barcode_scan: ^3.0.1`
+
+### Importante
+En android\app\build.gradle cambiar `minSdkVersion` de 16 a 18 y realizar la implementación de permisos que requiere el paquete de Barcode Scanner
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
