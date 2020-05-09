@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:lectorqr/src/pages/mapas_page.dart';
 import 'package:lectorqr/src/pages/direcciones_page.dart';
 
-// Barcode Scanner
-import 'package:barcode_scan/barcode_scan.dart';
+// Provider
+import 'package:lectorqr/src/providers/db_provider.dart';
+
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -81,10 +83,10 @@ class _HomePageState extends State<HomePage> {
   // Escaneando QR
   _scanQR() async {
 
-    // cristianx.github.io
+    // https://cristianx.github.io
     // geo:40.662799870614315,-74.26137342890628
 
-    dynamic futureString = '';
+    dynamic futureString = 'https://cristianx.github.io';
 
   //   try {
   //     futureString = await BarcodeScanner.scan();
@@ -94,9 +96,15 @@ class _HomePageState extends State<HomePage> {
 
   //   print('Future String: ${futureString.rawContent}');
 
-  //   if( futureString != null ) {
-  //     print('Tenemos Información');
-  //   }
+    if( futureString != null ) {
+
+      final scan = ScanModel( valor: futureString );
+
+      // Llamando proceso de inserción
+      DBProvider.db.nuevoScan(scan);
+
+      
+    }
 
   }
 }

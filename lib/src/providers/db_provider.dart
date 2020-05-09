@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 // Provider Path
 import 'package:path_provider/path_provider.dart';
 
-// Join
+// Path
 import 'package:path/path.dart';
 
 // Directory
@@ -16,6 +16,8 @@ import 'dart:io';
 
 // Modelos
 import 'package:lectorqr/src/models/scan_model.dart';
+// Para ponder utilizarlo en los archivos que importe el db provider
+export 'package:lectorqr/src/models/scan_model.dart';
 
 class DBProvider {
 
@@ -27,7 +29,7 @@ class DBProvider {
   DBProvider._();
 
   Future<Database> get database async {
-    if( database != null ) return _database;
+    if( _database != null ) return _database;
 
     _database = await initDB();
 
@@ -54,7 +56,7 @@ class DBProvider {
           'CREATE TABLE Scans ('
           ' id INTEGER PRIMARY KEY,'
           ' tipo TEXT,'
-          ' valor TEXT '
+          ' valor TEXT'
           ')'
          );
       }
