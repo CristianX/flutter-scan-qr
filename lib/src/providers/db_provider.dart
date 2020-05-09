@@ -83,9 +83,53 @@ class DBProvider {
     // Verificando si la BDD está lista para escribir en ella
     final db = await database;
 
-    final respuesta = db.insert('Scans', nuevoScan.toJson());
+    final respuesta = await db.insert('Scans', nuevoScan.toJson());
 
     return respuesta;
 
   }
+
+  // SELECT - Obtener información
+  Future<ScanModel> getScanId( int id ) async {
+
+    // Verificando si la BDD está lista para escribir en ella
+    final db = await database;
+
+    // ? son  argumentos y whereArgs donde se mandan estos argumentos
+    final respuesta = await db.query('Scans', where: 'id = ?', whereArgs: [id] );
+
+    return respuesta.isNotEmpty ? ScanModel.fromJson(res.first) : null;
+
+  }
+
+  // OBTENER todos los registros de la tabla Scans
+  Future<List<ScanModel>> getTodosScans() async {
+
+    // Verificando si la BDD está lista para escribir en ella
+    final db = await database;
+
+    final respuesta = await db.query('Scans');
+
+    List<ScanModel> list = respuesta.isNotEmpty ? respuesta.map( ( scan ) => ScanModel.fromJson(scan)).toList() : [];
+
+    return list;
+
+  }
+
+  // SELECT con condición de tipos
+  Future<List<ScanModel>> getScansPorTipo( String tipo ) async {
+
+    // Verificando si la BDD está lista para escribir en ella
+    final db = await database;
+
+    // se puede usar tambieén db.query
+    final respuesta = await db.rawQuery( "SELECT * FROM Scans WHERE tipo ='$tipo'" );
+
+    List<ScanModel> list = respuesta.isNotEmpty ? respuesta.map( ( scan ) => ScanModel.fromJson(scan)).toList() : [];
+
+    return list;
+
+  }
+
+
 }
