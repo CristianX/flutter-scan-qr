@@ -8,6 +8,9 @@ A new Flutter project.
 ### Importante
 En android\app\build.gradle cambiar `minSdkVersion` de 16 a 18 y realizar la implementación de permisos que requiere el paquete de Barcode Scanner
 
+### Herramienta de modelado
+https://app.quicktype.io/
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
