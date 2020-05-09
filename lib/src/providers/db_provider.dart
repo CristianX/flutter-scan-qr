@@ -14,6 +14,9 @@ import 'package:path/path.dart';
 import 'dart:io';
 
 
+// Modelos
+import 'package:lectorqr/src/models/scan_model.dart';
+
 class DBProvider {
 
   static Database _database;
@@ -60,4 +63,29 @@ class DBProvider {
 
   }
 
+  // CREAR Registros
+  // nuevoScanRow( ScanModel nuevoScan ) async {
+
+  //   // Verificando si la BDD está lista para escribir en ella
+  //   final db = await database;
+
+  //   final resultado = await db.rawInsert(
+  //     "INSERT Into Scans (id, tipo, valor) VALUES ( '${ nuevoScan.id }', '${ nuevoScan.tipo }', '${ nuevoScan.valor }')"
+  //   );
+
+  //   return resultado;
+
+  // }
+
+  // CREAR Registros, método más optimizado
+  nuevoScan( ScanModel nuevoScan ) async {
+    
+    // Verificando si la BDD está lista para escribir en ella
+    final db = await database;
+
+    final respuesta = db.insert('Scans', nuevoScan.toJson());
+
+    return respuesta;
+
+  }
 }
