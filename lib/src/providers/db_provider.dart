@@ -98,7 +98,7 @@ class DBProvider {
     // ? son  argumentos y whereArgs donde se mandan estos argumentos
     final respuesta = await db.query('Scans', where: 'id = ?', whereArgs: [id] );
 
-    return respuesta.isNotEmpty ? ScanModel.fromJson(res.first) : null;
+    return respuesta.isNotEmpty ? ScanModel.fromJson(respuesta.first) : null;
 
   }
 
@@ -129,6 +129,47 @@ class DBProvider {
 
     return list;
 
+  }
+
+
+  // ACTUALIZAR Registros
+  // Future<int> regresa un 1 si lo hizo y un 0 si no lo hizo
+  Future<int> updateScan( ScanModel nuevoScan ) async {
+
+    // Verificando si la BDD está lista para escribir en ella
+    final db = await database;
+
+    final respuesta = await db.update('Scans', nuevoScan.toJson(), where: 'id = ?', whereArgs: [ nuevoScan.id ] );
+
+    return respuesta;
+
+  }
+
+
+  // ELIMINAR registros
+  Future<int> deleteScan( int id ) async {
+
+    // Verificando si la BDD está lista para escribir en ella
+    final db = await database;
+
+    final respuesta = await db.delete('Scans', where: 'id = ?', whereArgs: [ id ]);
+
+    return respuesta;
+
+    
+  }
+
+  // ELIMINAR TODOS registros
+  Future<int> deleteAll() async {
+
+    // Verificando si la BDD está lista para escribir en ella
+    final db = await database;
+
+    final respuesta = await db.rawDelete('DELETE FROM Scans');
+
+    return respuesta;
+
+    
   }
 
 
