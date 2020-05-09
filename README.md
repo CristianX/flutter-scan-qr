@@ -4,6 +4,9 @@ A new Flutter project.
 
 # Dependencias
 - Barcode Scan `barcode_scan: ^3.0.1`
+- Sqflite `sqflite: ^1.3.0`
+<!-- Para saber la dirección donde se encuentra el archivo de la BDD físicamente en el dispositivo -->
+- Path Provider `path_provider: ^1.6.7` 
 
 ### Importante
 En android\app\build.gradle cambiar `minSdkVersion` de 16 a 18 y realizar la implementación de permisos que requiere el paquete de Barcode Scanner
