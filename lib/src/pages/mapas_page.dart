@@ -1,13 +1,27 @@
+import 'package:lectorqr/src/bloc/scans_bloc.dart';
+
+// // Provider
+// import 'package:lectorqr/src/providers/db_provider.dart';
+
+// Bloc Stream
 import 'package:flutter/material.dart';
 
-// Provider
-import 'package:lectorqr/src/providers/db_provider.dart';
+// Modelos
+import 'package:lectorqr/src/models/scan_model.dart';
 
 class MapasPage extends StatelessWidget {
+
+  // Instancia bloc
+  final scansBloc = new ScansBloc();
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<ScanModel>>(
-      future: DBProvider.db.getTodosScans(),
+    // Cambiando Futurebuilder por StreamBuilder
+    return StreamBuilder<List<ScanModel>>(
+      // future: DBProvider.db.getTodosScans(),
+
+      // Escuchando stream
+      stream: scansBloc.scansStream,
       builder: (BuildContext context, AsyncSnapshot<List<ScanModel>> snapshot) {
         if( !snapshot.hasData ) {
           return Center( child: CircularProgressIndicator(), );
@@ -28,7 +42,11 @@ class MapasPage extends StatelessWidget {
             key: UniqueKey(),
             background: Container( color: Colors.red ),
             // Método que se llamara al deslizar el Dismissible
-            onDismissed: ( direction ) => DBProvider.db.deleteScan( scans[i].id ),
+            // onDismissed: ( direction ) => DBProvider.db.deleteScan( scans[i].id ),
+
+            // Método que se llamara al deslizar el Dismissible con el stream
+            onDismissed: (direction) => scansBloc.borrarScan( scans[i].id ),
+
             child: ListTile(
               leading: Icon( Icons.cloud_queue, color: Theme.of(context).primaryColor, ),
               title: Text(scans[i].valor),

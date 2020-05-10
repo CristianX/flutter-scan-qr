@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:lectorqr/src/pages/mapas_page.dart';
 import 'package:lectorqr/src/pages/direcciones_page.dart';
 
-// Provider
-import 'package:lectorqr/src/providers/db_provider.dart';
+// Modelos
+import 'package:lectorqr/src/models/scan_model.dart';
 
+// // Provider
+// El provider solo se accederá desde bloc para que la información este centralizada
+// import 'package:lectorqr/src/providers/db_provider.dart';
 
+// Bloc
+import 'package:lectorqr/src/bloc/scans_bloc.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,6 +20,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  // Instancia de bloc
+  final scansBloc = new ScansBloc();
 
   int currentIndex = 0;
 
@@ -26,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton( 
             icon: Icon(Icons.delete_forever),
-            onPressed: (){},
+            onPressed: scansBloc.borrarScansTodos ,
            )
         ],
       ),
@@ -101,7 +109,10 @@ class _HomePageState extends State<HomePage> {
       final scan = ScanModel( valor: futureString );
 
       // Llamando proceso de inserción
-      DBProvider.db.nuevoScan(scan);
+      // DBProvider.db.nuevoScan(scan);
+
+      // Bloc Stream
+      scansBloc.agregarScan(scan);
 
       
     }
