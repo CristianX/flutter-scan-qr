@@ -18,8 +18,10 @@ class ScansBloc {
     return _singleton;
   }
 
+  // Cuando se ejecute conructor por primera vez
   ScansBloc._internal() {
     // Obtener Scans de la Base de datos
+    obtenerScans();
 
   }
 
@@ -30,6 +32,47 @@ class ScansBloc {
   // Cerrando instancia del Stream
   dispose() {
     _scansStreamController?.close();
+  }
+
+  // Eventos (normalmente van en otro archivo events)
+
+
+  obtenerScans() async {
+
+    _scansStreamController.sink.add( await DBProvider.db.getTodosScans() );
+
+  }
+
+
+  agregarScan( ScanModel scan ) async {
+
+    // Insertando en BDD
+    await DBProvider.db.nuevoScan(scan);
+
+    obtenerScans();
+  }
+
+
+  borrarScan( int id ) async{
+
+    // Borrar los Scans seleccionados
+    await DBProvider.db.deleteScan(id);
+
+    // Guarda y vuelve todos los scans
+    obtenerScans();
+
+  }
+
+  // En este caso async opcional
+  borrarScansTodos() async {
+
+    await DBProvider.db.deleteAll();
+
+    obtenerScans();
+
+    // También se puede hacer de esta manera
+    // _scansStreamController.sink.add([]);
+
   }
 
 
