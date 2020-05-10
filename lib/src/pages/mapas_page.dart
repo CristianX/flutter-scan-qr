@@ -23,10 +23,18 @@ class MapasPage extends StatelessWidget {
 
         return ListView.builder(
           itemCount: scans.length,
-          itemBuilder: ( context, i ) => ListTile(
-            leading: Icon( Icons.cloud_queue, color: Theme.of(context).primaryColor, ),
-            title: Text(scans[i].valor),
-            trailing: Icon( Icons.keyboard_arrow_right, color: Colors.grey, ),
+          itemBuilder: ( context, i ) => Dismissible(
+            // Creando llave única para el Dismissible
+            key: UniqueKey(),
+            background: Container( color: Colors.red ),
+            // Método que se llamara al deslizar el Dismissible
+            onDismissed: ( direction ) => DBProvider.db.deleteScan( scans[i].id ),
+            child: ListTile(
+              leading: Icon( Icons.cloud_queue, color: Theme.of(context).primaryColor, ),
+              title: Text(scans[i].valor),
+              subtitle: Text('ID: ${ scans[i].id }'),
+              trailing: Icon( Icons.keyboard_arrow_right, color: Colors.grey, ),
+            ),
           ),
         );
       },
