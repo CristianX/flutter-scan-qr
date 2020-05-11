@@ -1,3 +1,6 @@
+// Para evaluar tipo de plataforma
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 // Vistas
@@ -13,6 +16,9 @@ import 'package:lectorqr/src/models/scan_model.dart';
 
 // Bloc
 import 'package:lectorqr/src/bloc/scans_bloc.dart';
+
+// Utilidades ( as utils para llamarla cuando existan muchas utilidades )
+import 'package:lectorqr/src/utils/utils.dart' as utils ;
 
 class HomePage extends StatefulWidget {
   @override
@@ -113,6 +119,20 @@ class _HomePageState extends State<HomePage> {
 
       // Bloc Stream
       scansBloc.agregarScan(scan);
+
+      // Scan Mapas
+      // final scan2 = ScanModel( valor: 'geo:40.662799870614315,-74.26137342890628' );
+      // scansBloc.agregarScan(scan2);
+
+      // Corrigiendo error de espera en IOS
+      if( Platform.isIOS ) {
+        Future.delayed(Duration( milliseconds: 750 ), () {
+          utils.abrirScan(scan);
+        });
+      } else {
+        utils.abrirScan(scan);
+      }
+
 
       
     }

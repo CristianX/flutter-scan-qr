@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 // Modelos
 import 'package:lectorqr/src/models/scan_model.dart';
 
+// Utilidades
+import 'package:lectorqr/src/utils/utils.dart' as utils;
+
 class MapasPage extends StatelessWidget {
 
   // Instancia bloc
@@ -52,6 +55,8 @@ class MapasPage extends StatelessWidget {
               title: Text(scans[i].valor),
               subtitle: Text('ID: ${ scans[i].id }'),
               trailing: Icon( Icons.keyboard_arrow_right, color: Colors.grey, ),
+              // Llamando utilidades de launch url
+              onTap: () => utils.abrirScan( scans[i] ),
             ),
           ),
         );

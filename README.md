@@ -7,6 +7,7 @@ A new Flutter project.
 - Sqflite `sqflite: ^1.3.0`
 <!-- Para saber la dirección donde se encuentra el archivo de la BDD físicamente en el dispositivo -->
 - Path Provider `path_provider: ^1.6.7` 
+- Url Launcher `url_launcher: ^5.4.5` <!--Lanzae url o geo scaneada-->
 
 ### Importante
 En android\app\build.gradle cambiar `minSdkVersion` de 16 a 18 y realizar la implementación de permisos que requiere el paquete de Barcode Scanner
