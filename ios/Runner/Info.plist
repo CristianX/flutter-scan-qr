@@ -7,6 +7,10 @@
 	<key>NSCameraUsageDescription</key>
     <string>Se requiere permiso de la cámara para escanear el código de barras.</string>
 
+	<!-- Permisos de cámara -->
+	<key>NSCameraUsageDescription</key>
+    <string>You have to use the camera to scan a barcode, so we need permission</string>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
