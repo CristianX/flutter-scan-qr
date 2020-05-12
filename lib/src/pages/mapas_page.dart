@@ -19,6 +19,10 @@ class MapasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // Redibujando para correción de carga infinita
+    scansBloc.obtenerScans();
+
     // Cambiando Futurebuilder por StreamBuilder
     return StreamBuilder<List<ScanModel>>(
       // future: DBProvider.db.getTodosScans(),

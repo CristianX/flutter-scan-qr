@@ -7,8 +7,10 @@ import 'dart:async';
 // Provider
 import 'package:lectorqr/src/providers/db_provider.dart';
 
+// Validators
+import 'package:lectorqr/src/bloc/validator.dart';
 
-class ScansBloc {
+class ScansBloc with Validators {
 
   // Patrón singleton para una sola instancia
   static final ScansBloc _singleton = new ScansBloc._internal();
@@ -27,7 +29,11 @@ class ScansBloc {
 
   final _scansStreamController = StreamController<List<ScanModel>>.broadcast();
 
-  Stream <List<ScanModel>> get scansStream => _scansStreamController.stream;
+  // Implementando mixin de validator para ValidarGeo
+  Stream <List<ScanModel>> get scansStream => _scansStreamController .stream.transform( validarGeo );
+
+  // Aplicando MIXIN para evaluar cuales son de tipo http desde validator
+  Stream <List<ScanModel>> get scansStreamHttp => _scansStreamController .stream.transform( validarHttp );
 
   // Cerrando instancia del Stream
   dispose() {
