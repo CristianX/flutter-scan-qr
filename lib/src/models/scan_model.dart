@@ -1,3 +1,7 @@
+
+// Paquete de Latitud y longitud
+import 'package:latlong/latlong.dart';
+
 class ScanModel {
     int id;
     String tipo;
@@ -28,4 +32,17 @@ class ScanModel {
         "tipo"  : tipo,
         "valor" : valor,
     };
+
+    // Retornando latitud y longitud de geo
+    LatLng getLatLng() {
+
+      // substring(4) ignora los 4 primeros carácteres
+      // split(',') corta por una coma y lo convierte en lista
+      final latlng = valor.substring(4).split(',');
+      final lat = double.parse(latlng[0]);
+      final lng = double.parse(latlng[1]);
+
+      // Returnando con el paquete LatLng.dart
+      return LatLng( lat, lng );
+    }
 }

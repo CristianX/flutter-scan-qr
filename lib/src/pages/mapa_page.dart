@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
+
 // Modelos
 import 'package:lectorqr/src/models/scan_model.dart';
+
+// Certificado
+import 'package:lectorqr/src/certificate/certificate.dart';
+
+// Paquete FlutterMap
+import 'package:flutter_map/flutter_map.dart';
 
 
 class MapaPage extends StatelessWidget {
@@ -23,10 +30,39 @@ class MapaPage extends StatelessWidget {
         ],
       ),
 
-      body: Center(
-        child: Text( scan.valor ),
-      ),
+      body: _crearFlutterMap( scan )
       
     );
+  }
+
+  Widget _crearFlutterMap(ScanModel scan) {
+
+    return FlutterMap(
+      options: MapOptions(
+        center: scan.getLatLng(),
+        zoom: 10
+      ),
+      // Capas de información
+      layers: [
+        _crearMapa(),
+      ],
+    );
+
+  }
+
+   _crearMapa() {
+
+    return TileLayerOptions(
+      // @2x.png es para alta resolución
+      urlTemplate: 'https://api.mapbox.com/v4/{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}',
+      
+      // Para mandar el accessToken y el id
+      additionalOptions: {
+        'accessToken': Certificate.apikey,
+        // mapbox.streets mapa genérico
+        'id': 'mapbox.streets'
+      }
+    );
+
   }
 }

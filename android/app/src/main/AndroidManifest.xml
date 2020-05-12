@@ -29,4 +29,6 @@
     </application>
     <!-- Añadiendo permisos de camra de Barcode Scan -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Añadiendo permisos de Flutter Map -->
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
