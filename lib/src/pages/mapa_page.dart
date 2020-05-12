@@ -12,6 +12,10 @@ import 'package:flutter_map/flutter_map.dart';
 
 
 class MapaPage extends StatelessWidget {
+
+  // Controlador de flutter map
+  final map = new MapController();
+
   @override
   Widget build(BuildContext context) {
 
@@ -25,7 +29,11 @@ class MapaPage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon( Icons.my_location ),
-            onPressed: (){},
+            onPressed: (){
+
+              // Mover mapa hasta donde está el marcador
+              map.move( scan.getLatLng() , 15 );
+            },
           )
         ],
       ),
@@ -38,6 +46,7 @@ class MapaPage extends StatelessWidget {
   Widget _crearFlutterMap(ScanModel scan) {
 
     return FlutterMap(
+      mapController: map,
       options: MapOptions(
         center: scan.getLatLng(),
         zoom: 15
@@ -71,8 +80,8 @@ class MapaPage extends StatelessWidget {
     return MarkerLayerOptions(
       markers: <Marker>[
         Marker(
-          width: 120.0,
-          height: 120.0,
+          width: 100.0,
+          height: 100.0,
           point: scan.getLatLng(),
 
           // Para que se dibuje el marcador
