@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lectorqr/src/models/scan_model.dart';
 
 // Certificado
-import 'package:lectorqr/src/certificate/certificate.dart';
+// import 'package:lectorqr/src/certificate/certificate.dart';
 
 // Paquete FlutterMap
 import 'package:flutter_map/flutter_map.dart';
@@ -58,7 +58,7 @@ class MapaPage extends StatelessWidget {
       
       // Para mandar el accessToken y el id
       additionalOptions: {
-        'accessToken': Certificate.apikey,
+        'accessToken': 'pk.eyJ1Ijoia2xlcml0aCIsImEiOiJjanY2MjF4NGIwMG9nM3lvMnN3ZDM1dWE5In0.0SfmUpbW6UFj7ZnRdRyNAw',
         // mapbox.streets mapa genérico
         'id': 'mapbox.streets'
       }
