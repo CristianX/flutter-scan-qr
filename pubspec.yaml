@@ -32,6 +32,8 @@ dependencies:
   path_provider: ^1.6.7
   # Url Launcher
   url_launcher: ^5.4.5
+  # Flutter Map
+  flutter_map: ^0.9.0
 
 dev_dependencies:
   flutter_test:

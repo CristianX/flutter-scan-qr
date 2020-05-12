@@ -8,6 +8,7 @@ A new Flutter project.
 <!-- Para saber la dirección donde se encuentra el archivo de la BDD físicamente en el dispositivo -->
 - Path Provider `path_provider: ^1.6.7` 
 - Url Launcher `url_launcher: ^5.4.5` <!--Lanzae url o geo scaneada-->
+- Flutter Map `flutter_map: ^0.9.0` <!--Package para mostrar mapa-->
 
 ### Importante
 En android\app\build.gradle cambiar `minSdkVersion` de 16 a 18 y realizar la implementación de permisos que requiere el paquete de Barcode Scanner
