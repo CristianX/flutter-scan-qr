@@ -11,16 +11,28 @@ import 'package:lectorqr/src/models/scan_model.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 
-class MapaPage extends StatelessWidget {
+class MapaPage extends StatefulWidget {
+
+  
+  @override
+  _MapaPageState createState() => _MapaPageState();
+}
+
+class _MapaPageState extends State<MapaPage> {
 
   // Controlador de flutter map
   final map = new MapController();
+
+  // Cambio de estilo de mapa
+    String tipoMapa = 'streets'; 
 
   @override
   Widget build(BuildContext context) {
 
     // Para mandar argumentos en el navigator
     final ScanModel scan = ModalRoute.of(context).settings.arguments;
+
+    
 
     return Scaffold(
 
@@ -38,7 +50,8 @@ class MapaPage extends StatelessWidget {
         ],
       ),
 
-      body: _crearFlutterMap( scan )
+      body: _crearFlutterMap( scan ),
+      floatingActionButton: _cambioDeEstiloDeMapa( context ),
       
     );
   }
@@ -70,7 +83,7 @@ class MapaPage extends StatelessWidget {
       additionalOptions: {
         'accessToken': 'pk.eyJ1Ijoia2xlcml0aCIsImEiOiJjanY2MjF4NGIwMG9nM3lvMnN3ZDM1dWE5In0.0SfmUpbW6UFj7ZnRdRyNAw',
         // mapbox.streets mapa genérico
-        'id': 'mapbox.streets' // streets, dark, light, outdoors, satellite
+        'id': 'mapbox.$tipoMapa' // streets, dark, light, outdoors, satellite
       }
     );
 
@@ -91,6 +104,32 @@ class MapaPage extends StatelessWidget {
           )
         )
       ]
+    );
+  }
+
+  Widget _cambioDeEstiloDeMapa(BuildContext context) {
+    return FloatingActionButton(
+      child: Icon( Icons.repeat ),
+      backgroundColor: Theme.of(context).primaryColor,
+      onPressed: (){
+
+        // Dibujando cambios en la app
+        setState(() {
+          
+          if( tipoMapa == 'streets' ) {
+            tipoMapa = 'dark';
+          } else if ( tipoMapa == 'dark' ) {
+            tipoMapa = 'light';
+          } else if ( tipoMapa == 'light' ) {
+            tipoMapa = 'outdoors';
+          } else if( tipoMapa == 'outdoors' ) {
+            tipoMapa = 'satellite';
+          } else {
+            tipoMapa = 'streets';
+          }
+        });
+
+      }
     );
   }
 }
