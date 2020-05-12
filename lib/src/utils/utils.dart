@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 // Url Launcher
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,7 +11,7 @@ import 'package:lectorqr/src/models/scan_model.dart';
 
 
 
-abrirScan( ScanModel scan ) async {
+abrirScan( BuildContext context, ScanModel scan ) async {
 
 
   // Validación http/ge/ etc
@@ -22,7 +24,8 @@ abrirScan( ScanModel scan ) async {
     }
 
   } else {
-    print('GEO...');
+    // Mandando arguments a la vista de mapa_page
+    Navigator.pushNamed(context, 'mapa', arguments: scan);
   }
 
 }

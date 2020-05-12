@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
       // Creación de floatingActionButton
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
-        onPressed: _scanQR,
+        onPressed: () =>  _scanQR( context ),
         // Color de tema global para el floatingActionButton
         backgroundColor: Theme.of( context ).primaryColor,
       ),
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Escaneando QR
-  _scanQR() async {
+  _scanQR( BuildContext context ) async {
 
     // https://cristianx.github.io
     // geo:40.662799870614315,-74.26137342890628
@@ -127,10 +127,10 @@ class _HomePageState extends State<HomePage> {
       // Corrigiendo error de espera en IOS
       if( Platform.isIOS ) {
         Future.delayed(Duration( milliseconds: 750 ), () {
-          utils.abrirScan(scan);
+          utils.abrirScan(context, scan);
         });
       } else {
-        utils.abrirScan(scan);
+        utils.abrirScan(context, scan);
       }
 
 
