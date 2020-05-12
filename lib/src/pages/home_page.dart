@@ -1,6 +1,10 @@
 // Para evaluar tipo de plataforma
 import 'dart:io';
 
+// Barcode Scan
+import 'package:barcode_scan/barcode_scan.dart';
+
+
 import 'package:flutter/material.dart';
 
 // Vistas
@@ -100,19 +104,19 @@ class _HomePageState extends State<HomePage> {
     // https://cristianx.github.io
     // geo:40.662799870614315,-74.26137342890628
 
-    dynamic futureString = 'https://cristianx.github.io';
+    dynamic futureString;
 
-  //   try {
-  //     futureString = await BarcodeScanner.scan();
-  //   } catch (e) {
-  //     futureString = e.toString();
-  //   }
+    try {
+      futureString = await BarcodeScanner.scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
 
   //   print('Future String: ${futureString.rawContent}');
 
     if( futureString != null ) {
 
-      final scan = ScanModel( valor: futureString );
+      final scan = ScanModel( valor: futureString.rawContent );
 
       // Llamando proceso de inserción
       // DBProvider.db.nuevoScan(scan);
